@@ -5,7 +5,7 @@ class GetAllCallsCommand extends commando.Command {
     constructor(client) {
         super(client, {
             name: 'getallcalls',
-            group: 'random',
+            group: 'clash_caller',
             memberName: 'getallcalls',
             description: 'Get all calls',
         });

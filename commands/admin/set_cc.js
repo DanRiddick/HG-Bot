@@ -10,12 +10,11 @@ class SetClashCallerCodeCommand extends commando.Command {
             name: 'setcc',
             group: 'admin',
             memberName: 'setcc',
-            description: 'Set code'
+            description: 'Set code',
+            guildOnly: 'dibs'
         });
     }
     async run( message, args ) {
-        if(message.channel.name != 'dibs') return;
-        
         WAR_INFO.CURRENT_WAR_CODE = args;
         message.channel.sendMessage('CC code changed to ' + args);
     }

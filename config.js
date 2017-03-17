@@ -1,3 +1,4 @@
+console.log('hi');
 module.exports = {
     STACKED_CALLS: false,
     CLAN_TAG: '#8V8CJVLV',
