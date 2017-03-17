@@ -11,7 +11,8 @@ class SetClashCallerCodeCommand extends commando.Command {
             name: 'startwar',
             group: 'admin',
             memberName: 'startwar',
-            description: 'Start new clan war'
+            description: 'Start new clan war',
+            examples: ['startwar ## [enemy clan id]']
         });
     }
 
