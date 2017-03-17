@@ -46,7 +46,7 @@ class GetRosterCommand extends commando.Command {
         }
 
 
-        client.clanByTag('#8V8CJVLV').then(function(response) {
+        client.clanByTag(CONFIG.CLAN_TAG).then(function(response) {
             message.channel.send('__**' + response.name + ' Member List**__');
             
             var botResponse = '';
