@@ -18,16 +18,6 @@ class SetClashCallerCodeCommand extends commando.Command {
         if(message.channel.name != 'dibs') return;
         let leadershipRole = message.guild.roles.find('name', 'Leadership');
         if (message.member.roles.has(leadershipRole.id)) {
-            fs.readFile('war_info.js', 'utf-8', function(err, data) {
-                if (err) throw err;
-
-                var newValue = data.replace(WAR_INFO.CURRENT_WAR_CODE, args);
-
-                fs.writeFile('war_info.js', newValue, 'utf-8', function(err) {
-                    if (err) throw err;
-                    console.log('Changed war code');
-                });
-            });
             WAR_INFO.CURRENT_WAR_CODE = args;
             message.channel.sendMessage('CC code changed to ' + args);
         } else {
