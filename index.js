@@ -6,6 +6,7 @@ bot.registry.registerGroup('admin', 'Admin');
 bot.registry.registerGroup('clash_of_clans', 'Clash of Clans');
 bot.registry.registerDefaults();
 bot.registry.registerCommandsIn(__dirname + "/commands");
+bot._commandPrefix = "/";
 
 
 bot.login('MjkwOTI4NDYwNjIzMzgwNDgw.C6iYeQ.8Oin_Kv2E5bMwfRubQAlusoAmfo');
