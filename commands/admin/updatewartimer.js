@@ -18,31 +18,36 @@ class UpdateWarTimerCommand extends commando.Command {
 
     async run( message, args ) {
         if(message.channel.name != 'dibs') return;
+        let leadershipRole = message.guild.roles.find('name', 'Leadership');
+        if (message.member.roles.has(leadershipRole.id)) {
 
-        var options = args.split(' ');
+            var options = args.split(' ');
 
-        if (options.length != 2) {
-            message.channel.sendMessage(MESSAGES.INVALID_COMMAND);
-            return;
-        }
-
-        // Timer should be in the format ##h##m
-        if (options[1].length != 6) {
-            message.channel.sendMessage(MESSAGES.INVALID_COMMAND);
-            return;
-        }
-
-        var start = options[0].substring(0, 1);
-        var minutes = timerToSeconds(options[1]);
-
-        var xhr = new XMLHttpRequest();
-        xhr.open( "POST", "http://clashcaller.com/api.php", true );
-        xhr.setRequestHeader( "Content-type", 'application/x-www-form-urlencoded' );
-        xhr.send( "REQUEST=UPDATE_WAR_TIME&warcode=" + WAR_INFO.CURRENT_WAR_CODE + '&start=' + start + '&minutes=' + minutes);
-        xhr.onreadystatechange = function ( returnval ) {
-            if ( xhr.readyState == xhr.DONE && xhr.status == 200 ) {
-                message.channel.sendMessage(`War time update to ${options[1]}`);
+            if (options.length != 2) {
+                message.channel.sendMessage(MESSAGES.INVALID_COMMAND);
+                return;
             }
+
+            // Timer should be in the format ##h##m
+            if (options[1].length != 6) {
+                message.channel.sendMessage(MESSAGES.INVALID_COMMAND);
+                return;
+            }
+
+            var start = options[0].substring(0, 1);
+            var minutes = timerToSeconds(options[1]);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open( "POST", "http://clashcaller.com/api.php", true );
+            xhr.setRequestHeader( "Content-type", 'application/x-www-form-urlencoded' );
+            xhr.send( "REQUEST=UPDATE_WAR_TIME&warcode=" + WAR_INFO.CURRENT_WAR_CODE + '&start=' + start + '&minutes=' + minutes);
+            xhr.onreadystatechange = function ( returnval ) {
+                if ( xhr.readyState == xhr.DONE && xhr.status == 200 ) {
+                    message.channel.sendMessage(`War time update to ${options[1]}`);
+                }
+            }
+        } else {
+            message.channel.sendMessage("You do not have permission to use the `updatewartimer` command.");
         }
 
         function timerToSeconds(timer) {
