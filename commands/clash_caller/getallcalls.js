@@ -1,6 +1,7 @@
 const commando = require('discord.js-commando');
 var XMLHttpRequest = require('xhr2');
 var ConfigHelper = require('../../config_helper.js');
+var MESSAGES = require( '../../constants/messages.js' );
 
 class GetAllCallsCommand extends commando.Command {
     constructor(client) {
@@ -14,6 +15,10 @@ class GetAllCallsCommand extends commando.Command {
     async run(message, args) {
         if(message.channel.name != 'dibs') return;
         var warcode = new ConfigHelper().getConfigValueByKey('CURRENT_WAR_CODE');
+        if (warcode == null) {
+            message.channel.sendMessage(MESSAGES.NO_WAR);
+            return;
+        }
         var respstring = [], respnum = [], starnum = [];
         var botResponse = '\n', options, body, botReq;
         var xhr = new XMLHttpRequest();

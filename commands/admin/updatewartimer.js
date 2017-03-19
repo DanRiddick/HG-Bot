@@ -38,6 +38,10 @@ class UpdateWarTimerCommand extends commando.Command {
 
             var xhr = new XMLHttpRequest();
             var currentWarCode = new ConfigHelper().getConfigValueByKey('CURRENT_WAR_CODE');
+            if (currentWarCode == null) {
+                message.channel.sendMessage(MESSAGES.NO_WAR);
+                return;
+            }
             xhr.open( "POST", "http://clashcaller.com/api.php", true );
             xhr.setRequestHeader( "Content-type", 'application/x-www-form-urlencoded' );
             xhr.send( `REQUEST=UPDATE_WAR_TIME&warcode=${currentWarCode}&start=${start}&minutes=${minutes}`);

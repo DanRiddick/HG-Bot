@@ -19,6 +19,10 @@ class DeleteCallCommand extends commando.Command {
         
         var xhr = new XMLHttpRequest();
         var warcode = new ConfigHelper().getConfigValueByKey('CURRENT_WAR_CODE');
+        if (warcode == null) {
+            message.channel.sendMessage(MESSAGES.NO_WAR);
+            return;
+        }
         xhr.open("POST", "http://clashcaller.com/api.php", true);
         xhr.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
         xhr.send("REQUEST=GET_FULL_UPDATE&warcode=" + warcode);

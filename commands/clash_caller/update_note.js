@@ -17,6 +17,10 @@ class UpdateNoteCommand extends commando.Command {
         if(message.channel.name != 'dibs') return;
         
         var warcode = new ConfigHelper().getConfigValueByKey('warcode');
+        if (warcode == null) {
+            message.channel.sendMessage(MESSAGES.NO_WAR);
+            return;
+        }
         if ( args.length < 1 ) {
             message.channel.sendMessage( MESSAGES.INVALID_COMMAND );
         } else {

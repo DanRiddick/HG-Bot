@@ -16,6 +16,10 @@ class GetMyCallsCommand extends commando.Command {
     async run( message, args ) {
         if(message.channel.name != 'dibs') return;
         var warcode = new ConfigHelper().getConfigValueByKey('CURRENT_WAR_CODE');
+        if (warcode == null) {
+            message.channel.sendMessage(MESSAGES.NO_WAR);
+            return;
+        }
         var myCalls = [];
         var botResponse = '\n', options, body, botReq;
         var xhr = new XMLHttpRequest();
