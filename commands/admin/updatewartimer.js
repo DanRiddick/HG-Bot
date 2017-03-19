@@ -1,9 +1,8 @@
 const commando = require( 'discord.js-commando' );
 var XMLHttpRequest = require( 'xhr2' );
 var MESSAGES = require( '../../constants/messages.js' );
-var CONFIG = require('../../config.js');
-var WAR_INFO = require( '../../war_info.js' );
 const clashApi = require('clash-of-clans-api');
+var ConfigHelper = require('../../config_helper.js');
 
 class UpdateWarTimerCommand extends commando.Command {
     constructor( client ) {
@@ -38,9 +37,10 @@ class UpdateWarTimerCommand extends commando.Command {
             var minutes = timerToSeconds(options[1]);
 
             var xhr = new XMLHttpRequest();
+            var currentWarCode = new ConfigHelper().getConfigValueByKey('CURRENT_WAR_CODE');
             xhr.open( "POST", "http://clashcaller.com/api.php", true );
             xhr.setRequestHeader( "Content-type", 'application/x-www-form-urlencoded' );
-            xhr.send( "REQUEST=UPDATE_WAR_TIME&warcode=" + WAR_INFO.CURRENT_WAR_CODE + '&start=' + start + '&minutes=' + minutes);
+            xhr.send( `REQUEST=UPDATE_WAR_TIME&warcode=${currentWarCode}&start=${start}&minutes=${minutes}`);
             xhr.onreadystatechange = function ( returnval ) {
                 if ( xhr.readyState == xhr.DONE && xhr.status == 200 ) {
                     message.channel.sendMessage(`War time update to ${options[1]}`);

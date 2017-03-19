@@ -1,7 +1,7 @@
 const commando = require( 'discord.js-commando' );
 var MESSAGES = require( '../../constants/messages.js' );
 var REG_EXP = require( '../../constants/regular_expressions.js' );
-var WAR_INFO = require( '../../war_info.js' );
+var ConfigHelper = require('../../config_helper.js');
 var XMLHttpRequest = require( 'xhr2' );
 
 class UpdateNoteCommand extends commando.Command {
@@ -16,6 +16,7 @@ class UpdateNoteCommand extends commando.Command {
     async run( message, args ) {
         if(message.channel.name != 'dibs') return;
         
+        var warcode = new ConfigHelper().getConfigValueByKey('warcode');
         if ( args.length < 1 ) {
             message.channel.sendMessage( MESSAGES.INVALID_COMMAND );
         } else {
@@ -38,7 +39,7 @@ class UpdateNoteCommand extends commando.Command {
                         // This seems to fire even on success
                     }
                 };
-                xhr.send( "REQUEST=UPDATE_TARGET_NOTE&warcode=" + WAR_INFO.CURRENT_WAR_CODE + '&posy=' + posy + '&value=' + note );
+                xhr.send( "REQUEST=UPDATE_TARGET_NOTE&warcode=" + warcode + '&posy=' + posy + '&value=' + note );
             }
         }
     }

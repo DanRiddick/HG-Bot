@@ -1,7 +1,7 @@
 const commando = require( 'discord.js-commando' );
 var MESSAGES = require( '../../constants/messages.js' );
 var REG_EXP = require( '../../constants/regular_expressions.js' );
-var WAR_INFO = require( '../../war_info.js' );
+var ConfigHelper = require('../../config_helper.js');
 
 class DiceRollCommand extends commando.Command {
     constructor(client) {
@@ -15,8 +15,8 @@ class DiceRollCommand extends commando.Command {
 
     async run(message, args) {
         if(message.channel.name != 'dibs') return;
-        
-        message.reply("http://clashcaller.com/war/" + WAR_INFO.CURRENT_WAR_CODE);
+        var warcode = new ConfigHelper().getConfigValueByKey('CURRENT_WAR_CODE');
+        message.reply(`http://clashcaller.com/war/${warcode}`);
     }
 }
 

@@ -1,8 +1,8 @@
 const commando = require('discord.js-commando');
 var MESSAGES = require('../../constants/messages.js');
 var REG_EXP = require('../../constants/regular_expressions.js');
-var WAR_INFO = require('../../war_info.js');
 var XMLHttpRequest = require('xhr2');
+var ConfigHelper = require('../../config_helper.js');
 
 class AttackedCommand extends commando.Command {
     constructor(client) {
@@ -18,9 +18,10 @@ class AttackedCommand extends commando.Command {
         if(message.channel.name != 'dibs') return;
         
         var xhr = new XMLHttpRequest();
+        var warcode = new ConfigHelper().getConfigValueByKey('CURRENT_WAR_CODE');
         xhr.open("POST", "http://clashcaller.com/api.php", true);
         xhr.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
-        xhr.send("REQUEST=GET_FULL_UPDATE&warcode=" + WAR_INFO.CURRENT_WAR_CODE);
+        xhr.send(`REQUEST=GET_FULL_UPDATE&warcode=${warcode}`);
         xhr.onreadystatechange = function (returnval) {
             if (xhr.readyState == xhr.DONE && xhr.status == 200) {
                 var response = JSON.parse(xhr.responseText);
@@ -68,7 +69,7 @@ class AttackedCommand extends commando.Command {
                     var xhr2 = new XMLHttpRequest();
                     xhr2.open("POST", "http://clashcaller.com/api.php", true);
                     xhr2.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
-                    xhr2.send("REQUEST=UPDATE_STARS&warcode=" + WAR_INFO.CURRENT_WAR_CODE + '&posx=' + call.posx + '&posy=' + call.posy + '&value=' + (stars + 2));
+                    xhr2.send("REQUEST=UPDATE_STARS&warcode=" + warcode + '&posx=' + call.posx + '&posy=' + call.posy + '&value=' + (stars + 2));
                     xhr2.onreadystatechange = function (returnval) {
                         if (xhr2.readyState == xhr2.DONE && xhr2.status == 200) {
                             botResponse += 'Logged ' + stars + ' stars on #' + (posy + 1) + ' by ' + playername;

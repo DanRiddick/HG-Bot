@@ -1,7 +1,7 @@
 const commando = require('discord.js-commando');
 const clashApi = require('clash-of-clans-api');
 var XMLHttpRequest = require('xhr2');
-var CONFIG = require('../../config.js');
+var ConfigHelper = require('../../config_helper.js');
 
 class GetRosterCommand extends commando.Command {
     constructor(client) {
@@ -13,8 +13,9 @@ class GetRosterCommand extends commando.Command {
         });
     }
     async run(message, args) {
+        var config = new ConfigHelper().getConfig();
         let client = clashApi({
-            token: CONFIG.COC_API_TOKEN
+            token: config.COC_API_TOKEN
         });
 
         function getEmoji(key) {
@@ -46,7 +47,7 @@ class GetRosterCommand extends commando.Command {
         }
 
 
-        client.clanByTag(CONFIG.CLAN_TAG).then(function(response) {
+        client.clanByTag(config.CLAN_TAG).then(function(response) {
             message.channel.send('__**' + response.name + ' Member List**__');
             
             var botResponse = '';

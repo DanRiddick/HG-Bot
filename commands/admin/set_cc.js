@@ -1,9 +1,8 @@
 const commando = require( 'discord.js-commando' );
 var MESSAGES = require( '../../constants/messages.js' );
 var REG_EXP = require( '../../constants/regular_expressions.js' );
-var WAR_INFO = require( '../../war_info.js' );
+var ConfigHelper = require('../../config_helper.js');
 var XMLHttpRequest = require( 'xhr2' );
-var fs = require('fs');
 
 class SetClashCallerCodeCommand extends commando.Command {
     constructor( client ) {
@@ -18,7 +17,8 @@ class SetClashCallerCodeCommand extends commando.Command {
         if(message.channel.name != 'dibs') return;
         let leadershipRole = message.guild.roles.find('name', 'Leadership');
         if (message.member.roles.has(leadershipRole.id)) {
-            WAR_INFO.CURRENT_WAR_CODE = args;
+            var configHelper = new ConfigHelper();
+            configHelper.setConfigValueByKey('CURRENT_WAR_CODE', args);
             message.channel.sendMessage('CC code changed to ' + args);
         } else {
             message.channel.sendMessage("You do not have permission to use the `setcc` command.");

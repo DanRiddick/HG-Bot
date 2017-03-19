@@ -1,8 +1,7 @@
 const commando = require( 'discord.js-commando' );
 var MESSAGES = require( '../../constants/messages.js' );
 var REG_EXP = require( '../../constants/regular_expressions.js' );
-var WAR_INFO = require( '../../war_info.js' );
-var CONFIG = require( '../../config.js' );
+var ConfigHelper = require('../../config_helper.js');
 var XMLHttpRequest = require( 'xhr2' );
 
 class CallCommand extends commando.Command {
@@ -93,9 +92,10 @@ class CallCommand extends commando.Command {
         }
 
         var xhr = new XMLHttpRequest();
+        var config = new ConfigHelper().getConfig();
         xhr.open("POST", "http://clashcaller.com/api.php", true);
         xhr.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
-        xhr.send("REQUEST=GET_FULL_UPDATE&warcode=" + WAR_INFO.CURRENT_WAR_CODE);
+        xhr.send("REQUEST=GET_FULL_UPDATE&warcode=" + config.CURRENT_WAR_CODE);
         xhr.onreadystatechange = function (returnval) {
             if (xhr.readyState == xhr.DONE && xhr.status == 200) {
                 var response = JSON.parse(xhr.responseText);
@@ -104,7 +104,7 @@ class CallCommand extends commando.Command {
                     return;
                 }
 
-                if (!CONFIG.STACKED_CALLS) {
+                if (!config.STACKED_CALLS) {
                     var calls = response.calls;
                     var foundCall = false;
                     var call = undefined;
@@ -120,11 +120,11 @@ class CallCommand extends commando.Command {
                     }
                 } 
 
-                // TODO: Call target
+                // Call target
                 var xhr2 = new XMLHttpRequest();
                 xhr2.open("POST", "http://clashcaller.com/api.php", true);
                 xhr2.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
-                xhr2.send("REQUEST=APPEND_CALL&warcode=" + WAR_INFO.CURRENT_WAR_CODE + '&posy=' + posy + '&value=' + playername);
+                xhr2.send("REQUEST=APPEND_CALL&warcode=" + config.CURRENT_WAR_CODE + '&posy=' + posy + '&value=' + playername);
                 xhr2.onreadystatechange = function (returnval) {
                     if (xhr2.readyState == xhr2.DONE && xhr2.status == 200) {
                         message.channel.sendMessage('Called #' + (posy + 1) + ' for ' + playername);

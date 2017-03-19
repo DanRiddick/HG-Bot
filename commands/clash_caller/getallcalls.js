@@ -1,5 +1,6 @@
 const commando = require('discord.js-commando');
 var XMLHttpRequest = require('xhr2');
+var ConfigHelper = require('../../config_helper.js');
 
 class GetAllCallsCommand extends commando.Command {
     constructor(client) {
@@ -12,6 +13,7 @@ class GetAllCallsCommand extends commando.Command {
     }
     async run(message, args) {
         if(message.channel.name != 'dibs') return;
+        var warcode = new ConfigHelper().getConfigValueByKey('CURRENT_WAR_CODE');
         var respstring = [], respnum = [], starnum = [];
         var botResponse = '\n', options, body, botReq;
         var xhr = new XMLHttpRequest();
@@ -19,7 +21,7 @@ class GetAllCallsCommand extends commando.Command {
 
         xhr.open("POST", "http://clashcaller.com/api.php", true);
         xhr.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
-        xhr.send("REQUEST=GET_FULL_UPDATE&warcode=6wxta");
+        xhr.send(`REQUEST=GET_FULL_UPDATE&warcode=${warcode}`);
         xhr.onreadystatechange = function (returnval) {
             if (xhr.readyState == xhr.DONE && xhr.status == 200) {
                 var respJSON = JSON.parse(xhr.responseText);
