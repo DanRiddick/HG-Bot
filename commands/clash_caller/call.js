@@ -11,7 +11,7 @@ class CallCommand extends commando.Command {
             group: 'clash_caller',
             memberName: 'call',
             description: 'Call target',
-            examples: ['!call #', '!call # for [player name]']
+            examples: ['call #', 'call # for [player name]']
         });
     }
     async run( message, args ) {

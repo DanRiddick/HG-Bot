@@ -11,7 +11,7 @@ class DeleteCallCommand extends commando.Command {
             group: 'clash_caller',
             memberName: 'deletecall',
             description: 'Delete call',
-            examples: ['!deletecall #', '!deletecall # for [player name]']
+            examples: ['deletecall #', 'deletecall # for [player name]']
         });
     }
     async run(message, args) {

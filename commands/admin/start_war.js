@@ -21,7 +21,6 @@ class SetClashCallerCodeCommand extends commando.Command {
         if (message.member.roles.has(leadershipRole.id)) {
             var options = args.split(' ');
             let configHelper = new ConfigHelper();
-            console.log('booo')
             var config = configHelper.getConfig();
 
             if (options.length != 2) {

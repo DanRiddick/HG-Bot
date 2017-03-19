@@ -11,7 +11,7 @@ class AttackedCommand extends commando.Command {
             group: 'clash_caller',
             memberName: 'attacked',
             description: 'Log attack',
-            examples: ['!attacked # for # stars', '!attacked # for # stars by [player name]']
+            examples: ['attacked # for # stars', 'attacked # for # stars by [player name]']
         });
     }
     async run(message, args) {

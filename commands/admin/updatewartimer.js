@@ -11,7 +11,7 @@ class UpdateWarTimerCommand extends commando.Command {
             group: 'admin',
             memberName: 'updatewartimer',
             description: 'Change war timer (##h##m)',
-            examples: ['!updatewartimer [end|start] [##h##m]']
+            examples: ['updatewartimer [end|start] [##h##m]']
         });
     }
 
