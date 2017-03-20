@@ -50,6 +50,7 @@ class SetClashCallerCodeCommand extends commando.Command {
                         configHelper.setConfigValueByKey('CURRENT_WAR_CODE', ccId);
                         message.channel.sendMessage('**War started against ' + response.name + '!** Show em what Higher Ground is all about!');
                         message.channel.sendMessage("http://clashcaller.com/" + xhr.responseText);
+                        message.channel.sendMessage('***Don\'t forget to set the townhall breakdown by running the `/setbreakdown` command.***');
                     }
                 }
             }, function(err) {
