@@ -17,7 +17,8 @@ class AssPicCommand extends commando.Command {
     async run(message, args) {
         if(message.channel.name != 'general') return;
         var asspics = [
-            'http://i.imgur.com/xBra65Y.jpg'
+            'http://i.imgur.com/xBra65Y.jpg',
+            'http://i.imgur.com/bSylp29.jpg'
         ]
 
         var random = Math.floor(Math.random() * asspics.length);
