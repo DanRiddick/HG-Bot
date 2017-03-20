@@ -22,6 +22,10 @@ class SetClashCallerCodeCommand extends commando.Command {
             var options = args.split(' ');
             let configHelper = new ConfigHelper();
             var config = configHelper.getConfig();
+            if (config.CURRENT_WAR_CODE != null) {
+                message.channel.sendMessage('End the current war before starting a new one.');
+                return;
+            }
 
             if (options.length != 2) {
                 message.channel.sendMessage(MESSAGES.INVALID_COMMAND)

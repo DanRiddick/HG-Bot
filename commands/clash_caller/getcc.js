@@ -2,6 +2,7 @@ const commando = require( 'discord.js-commando' );
 var MESSAGES = require( '../../constants/messages.js' );
 var REG_EXP = require( '../../constants/regular_expressions.js' );
 var ConfigHelper = require('../../config_helper.js');
+var XMLHttpRequest = require( 'xhr2' );
 
 class DiceRollCommand extends commando.Command {
     constructor(client) {
