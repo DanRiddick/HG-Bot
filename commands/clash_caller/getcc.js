@@ -22,17 +22,6 @@ class DiceRollCommand extends commando.Command {
             return;
         }
         message.reply(`http://clashcaller.com/war/${warcode}`);
-        
-        var xhr = new XMLHttpRequest();
-        xhr.open( "GET", `http://trolluprising.com/services/saveWar?warcode=${warcode}`, true );
-        xhr.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
-        xhr.send();
-        xhr.onreadystatechange = function (returnval) {
-            if (xhr.readyState == xhr.DONE && xhr.status == 200) {
-                var respJSON = JSON.parse(xhr.responseText);
-                console.log(respJSON);
-            }
-        }
     }
 }
 
