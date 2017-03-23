@@ -35,6 +35,7 @@ class StatsCommand extends commando.Command {
                     `\`\`\`javascript\n` + 
                     `Attacks: ${stats.totalAttacks} | Stars: ${stats.totalStars} | ` +
                     `Stars/Attack: ${(Math.round(stats.totalStars/stats.totalAttacks * 10) / 10).toFixed(1)}` +
+                    `\nMissed Attacks: ${stats.expiredCalls}` +
                     `\n\`\`\``
                 );
                 for (let stat in stats.details) {
