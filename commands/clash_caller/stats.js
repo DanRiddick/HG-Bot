@@ -11,11 +11,12 @@ class StatsCommand extends commando.Command {
             group: 'clash_caller',
             memberName: 'stats',
             description: 'Gets stats.',
+            examples: ['/stats', '/stats [playername]']
         });
     }
 
     async run(message, args) {
-        if(message.channel.name != 'dibs') return;
+        if(message.channel.name != 'dibs' || message.channel.name != 'leadership') return;
         var xhr = new XMLHttpRequest();
         var playername = message.author.username;
         if (args) {
