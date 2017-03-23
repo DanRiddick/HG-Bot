@@ -26,6 +26,14 @@ class EndWarCommand extends commando.Command {
                 message.channel.sendMessage(MESSAGES.NO_WAR);
                 return;
             }
+
+            if (config.END_WAR_DOUBLE_CHECK == 0) {
+                message.channel.sendMessage('Are you sure you want to end the war? This will not be able to be undone, and all stats will be collected. (Run the command again to continue.)');
+                new ConfigHelper().setConfigValueByKey('END_WAR_DOUBLE_CHECK', 1);
+                return;
+            }
+                
+            new ConfigHelper().setConfigValueByKey('END_WAR_DOUBLE_CHECK', 0);
             
         
             var xhr = new XMLHttpRequest();
