@@ -26,25 +26,19 @@ class EndWarCommand extends commando.Command {
                 message.channel.sendMessage(MESSAGES.NO_WAR);
                 return;
             }
+            
+        
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "http://clashcaller.com/api.php", true);
+            xhr.open( "GET", `http://trolluprising.com/services/saveWar?warcode=${config.CURRENT_WAR_CODE}`, true );
             xhr.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
-            xhr.send(`REQUEST=GET_FULL_UPDATE&warcode=${config.CURRENT_WAR_CODE}`);
+            xhr.send();
             xhr.onreadystatechange = function (returnval) {
                 if (xhr.readyState == xhr.DONE && xhr.status == 200) {
                     var respJSON = JSON.parse(xhr.responseText);
-                    fs.readFile('war_history.json', 'utf8', function readFileCallback(err, data) {
-                        if (err){
-                            console.log(err);
-                        } else {
-                            let warHistory = JSON.parse(data);
-                            warHistory.warHistory.push(respJSON);
-                            let json = JSON.stringify(warHistory);
-                            fs.writeFile('war_history.json', json, 'utf8', function(){});
-                            new ConfigHelper().setConfigValueByKey('CURRENT_WAR_CODE', null);
-                            message.channel.sendMessage('War ended.');
-                        }
-                    });
+                    console.log(respJSON);
+                    new ConfigHelper().setConfigValueByKey('CURRENT_WAR_CODE', null);
+                } else if (xhr.readyState == xhr.DONE && xhr.status == 400) {
+                    message.channel.sendMessage('Invalid warcode.');
                 }
             }
         } else {
