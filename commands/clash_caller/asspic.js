@@ -18,7 +18,15 @@ class AssPicCommand extends commando.Command {
         if(message.channel.name != 'general') return;
         var asspics = [
             'http://i.imgur.com/xBra65Y.jpg',
-            'http://i.imgur.com/bSylp29.jpg'
+            'http://i.imgur.com/bSylp29.jpg',
+            'http://i.imgur.com/HHrP9GZ.jpg',
+            'http://i.imgur.com/ppEuj5F.jpg',
+            'http://i.imgur.com/jB9inTw.jpg',
+            'http://i.imgur.com/z9HLyA6.jpg',
+            'http://i.imgur.com/kAWZcGp.jpg',
+            'http://i.imgur.com/17lS9I9.jpg',
+            'http://i.imgur.com/2nnGixF.jpg'
+
         ]
 
         var random = Math.floor(Math.random() * asspics.length);
