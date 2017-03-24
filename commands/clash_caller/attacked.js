@@ -68,7 +68,30 @@ class AttackedCommand extends commando.Command {
                     var botResponse = '';
                     if (stars == 3) {
                         // TODO: Create random awesome message
-                        botResponse += "***Someone wore their big boy pants today!***\n";
+                        var congrats = [
+                            '***OH BABY A TRIPLE!!!!***\n',
+                            '***Pour one out for that base!***\n',
+                            '***Three cheers for ' + playername + '!***\n',
+                            '***And boom goes the dynamite!!***\n',
+                            '***Victory is yours!***\n',
+                            '***Nicely done ' + playername + '! Now we expect it every time!***\n',
+                            '***Nailed it ' + playername + '!***\n',
+                            '***We are all witnesses...!***\n',
+                            '***I knew we kept you around for something... Well done!***\n',
+                            '***TOTAL DEVISTATION!***\n',
+                            '\:muscle:\:muscle:\:muscle:***!***\n',
+                            '***Today we are blessed with greatness!***\n',
+                            '***You came, you saw, you conquered!***\n',
+                            '***Sometimes it\'s better to be lucky than good, am I right?!***\n',
+                            '\:star:\:star:\:star:***!***\n',
+                            '***That replay deserves an Oscar!***\n',
+                            '***Flex those muscles!***\n',
+                            '***Shake those stars!***\n',
+                            '***Brb getting your trophy engraved!***\n',
+                            '***Someone wore their big boy pants today!***\n'
+                        ]
+                        var random = Math.floor(Math.random() * congrats.length);
+                        botResponse += congrats[random]
                     }
                     var xhr2 = new XMLHttpRequest();
                     xhr2.open("POST", "http://clashcaller.com/api.php", true);
